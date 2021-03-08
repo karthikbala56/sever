@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import image from '../../../images/visitor.jpg'
 
 export default function Welcome() {
   const onBtnClick = () => {
@@ -8,12 +9,14 @@ export default function Welcome() {
   };
 
   return (
+    <ImageBackground source={image} style={styles.img}>
     <View style={styles.WelcomeContainer}>
-      <Text style={styles.headerText}>Welcome to todo List</Text>
+      <Text style={styles.headerText}>Welcome Visitor's!</Text>
       <TouchableOpacity onPress={onBtnClick} style={styles.btn}>
-        <Text style={styles.btnText}>Get inside</Text>
+        <Text style={styles.btnText}>View Visit's</Text>
       </TouchableOpacity>
     </View>
+    </ImageBackground>
   );
 }
 
@@ -24,8 +27,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 25,
     marginBottom: 10,
+    fontWeight:'bold',
+    color:'#000080'
   },
   btn: {
     width: 150,
@@ -34,10 +39,15 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
     backgroundColor: '#000080',
     alignItems: 'center',
-    padding: 10,
+    padding: 13,
   },
   btnText: {
-    fontSize: 16,
+    fontSize: 18,
     color: 'white',
   },
+  img:{
+    flex:1,
+    height:null,
+    width:null
+  }
 });

@@ -1,5 +1,4 @@
-import React, {Component}  from 'react';
-import {useState} from 'react';
+import React, {Component} from 'react';
 import {
   View,
   TextInput,
@@ -11,27 +10,23 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-
-import Header from '../../reusable components/Header';
 import axios from 'axios';
+import Header from '../../reusable components/Header';
 import {Actions} from 'react-native-router-flux';
 
 export default class SecondFile extends Component {
-  
-  
-
   constructor(props) {
     super(props);
-   
-    this.todoItem = [];
+
+    this.visitorItem = [];
 
     this.state = {
-      todos: [],
+
+      visitors: [],
       show: false,
       loader: false,
     };
   }
-  
 
   onPressHandler = () => {
     this.setState({
@@ -44,69 +39,54 @@ export default class SecondFile extends Component {
       loader: true,
     });
     axios
-      .get('http://192.168.1.19:7000/')
+      .get('http://192.168.1.19:1234/')
       .then((response) => {
-        console.log(response.data);
         this.setState({
-          todos: response.data,
+          visitors: response.data,
           loader: false,
-          
         });
-        console.log(response.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }
-  
 
   onEdit = (id) => {
     Actions.Edit({id});
-    
   };
-  onDelete = (id) => {
-    Actions.Delete({id});
-  }
 
   _renderItem = ({item}) => (
-    
-    <View style={styles.todoBox}>
-       <Text style={styles.todoBoxText}>Id:{item._id}</Text>
-      <Text style={styles.todoBoxText}>Title:{item.title}</Text>
-      <Text style={styles.todoBoxText}>Description:{item.description}</Text>
+    <View style={styles.visitBox}>
+      <Text style={styles.visitBoxText}>Visitor Name:{item.visitorname}</Text>
+      <Text style={styles.visitBoxText}>Mobile:{item.mobile}</Text>
+      <Text style={styles.visitBoxText}>Wing:{item.wing}</Text>
+      <Text style={styles.visitBoxText}>Flat:{item.flat}</Text>
+      <Text style={styles.visitBoxText}>Date:{item.date}</Text>
+      <Text style={styles.visitBoxText}>Time:{item.time}</Text>
       <TouchableOpacity onPress={this.onEdit.bind(this, item.id)}>
         <Text>Edit</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={this.onDelete.bind(this, item.id)}>
-        <Text>Delete</Text>
       </TouchableOpacity>
     </View>
   );
 
   render() {
-    const {name, show, todos, loader} = this.state;
-    console.log(todos);
-  
-  
-  
+    const {visitors, loader} = this.state;
+    console.log(visitors);
     return (
       <View style={styles.Container}>
-        {todos !== null ? (
+        {visitors !== null ? (
           <>
-            <Header title="Todo List" />
+            <Header title="Visitor's" />
             {loader ? (
               <View>
                 <ActivityIndicator size="large" color="black" />
               </View>
             ) : (
-              <FlatList 
-              data={todos} 
-              renderItem={this._renderItem}
-                />
+              <FlatList data={visitors} renderItem={this._renderItem} />
             )}
           </>
-        ) : ( 
-          <Text>No Todo's to show</Text>
+        ) : (
+          <Text>No Visitor's to show</Text>
         )}
       </View>
     );
@@ -119,44 +99,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  input: {
-    borderWidth: 1,
-  },
-  btn: {
-    borderWidth: 1,
-    borderColor: 'yellow',
-    padding: 10,
-    width: 100,
-    height: 50,
-    marginLeft: 30,
-    borderRadius: 60,
-    backgroundColor: 'red',
-  },
-  todoBox: {
-    width: 400,
+  visitBox: {
+    width: 360,
     height: 200,
-    borderWidth: 0.6,
+    borderWidth: 10,
     borderColor: 'blue',
     padding: 10,
     marginTop: 15,
+    backgroundColor:'skyblue'
   },
-  todoBoxText: {
+  visitBoxText: {
     fontSize: 18,
-    justifyContent:'center',
-    alignItems:'center',
-    color:'green'
+    color:'blue',
+    fontWeight:'bold'
   },
-  Completed: {
-    color: 'green',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  inComplete: {
-    color: 'red',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  textContainer: {
-    marginTop: 20,
-  },
+  
 });

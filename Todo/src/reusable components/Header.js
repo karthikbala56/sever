@@ -7,11 +7,16 @@ export default function Header(props) {
   };
   return (
     <View style={styles.HeaderContainer}>
-      <View style={{marginLeft:30}} />
-      <Text style={styles.HeaderText}>{props._id}</Text>
-      <Text style={styles.HeaderText}>{props.title}</Text>
-      <Text style={styles.HeaderText}>{props.description}</Text>
-      <Text style={styles.HeaderText}>{props.Edit}</Text>
+      <Text style={styles.HeaderText}>{props.visitorname}</Text>
+      <Text style={styles.HeaderText}>{props.gender}</Text>
+      <Text style={styles.HeaderText}>{props.mobile}</Text>
+      <Text style={styles.HeaderText}>{props.wing}</Text>
+      <Text style={styles.HeaderText}>{props.flat}</Text>
+      <Text style={styles.HeaderText}>{props.flatowner}</Text>
+      <Text style={styles.HeaderText}>{props.date}</Text>
+      <Text style={styles.HeaderText}>{props.time}</Text>
+      <Text style={styles.HeaderText}>{props.visitoraddress}</Text>
+      <Text style={styles.HeaderText}>{props.purpose}</Text>
       <TouchableOpacity style={styles.btn} onPress={onAddPress}>
         <Text style={styles.HeaderText}>Add</Text>
       </TouchableOpacity>
@@ -21,9 +26,9 @@ export default function Header(props) {
 
 const styles = StyleSheet.create({
   HeaderContainer: {
-    width: 450,
+    width: 400,
     height: 80,
-    backgroundColor: 'black',
+    backgroundColor: 'blue',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection:'row'
